@@ -1,0 +1,21 @@
+#div_sec_data {
+    display: flex;
+}
+
+.flex {
+    display: flex;
+}
+
+#left_sec {
+    width: 50%;
+}
+
+#left_sec {
+    width: 50%;
+
+}
+
+#button_bar {
+    display: flex;
+    width: 100%;
+}

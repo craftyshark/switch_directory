@@ -1,0 +1,7 @@
+okay so, we have our json, so there's no real need for most of 
+the resultant javascript. I think I'll still keep parts
+of it just in case
+
+It's time to understand what exactly ajax is, and how we are
+expected to pull it from the client side, for display. 
+
