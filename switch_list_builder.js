@@ -13,6 +13,20 @@ class switch_loaders {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 let durockSunflower = new switch_loaders("67g", "POM", "POM", "POM", "Durock", "Sunflower", "$10.00", "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/durock-sunflower-pom-t1-tactile-switches-496716.jpg?v=1636594837", "https://divinikey.com/products/durock-sunflower-pom-t1-tactile-switches");
 let bobaU4T = new switch_loaders("68g", "Custom Material", "Custom Material", "POM", "Boba", "U4T", "$10.00", "https://switches.mx/img/containers/assets/switches/photos/U4THero.jpg/d7a3b90e8992ba3dd7771251e3738a8f.jpg", "https://divinikey.com/products/boba-u4t-tactile-switches");
 let bobaSL = new switch_loaders("68g", "Custom Material", "Custom Material", "POM", "Boba", "SL", "$10.00", "https://switches.mx/img/containers/assets/switches/photos/switch-1643161972.PNG/ab091d2bad062f4a2209dd54f7ab7bde.PNG", "https://divinikey.com/products/boba-sl-tactile-switches");
@@ -21,7 +35,7 @@ let durockShrimp = new switch_loaders("67g", "PC", "Nylon", "POM", "Durock", "Sh
 
 
 const switchArray = [durockSunflower, bobaU4T, bobaSL, aquaKing, durockShrimp];
-
+*/
 
 /*
 console.log(switchArray[0].name);

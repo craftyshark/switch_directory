@@ -5,3 +5,4 @@ of it just in case
 It's time to understand what exactly ajax is, and how we are
 expected to pull it from the client side, for display. 
 
+notes for Cecotti: so, what file extension should I save these websites as? 

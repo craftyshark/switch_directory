@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Switch Directory</title>
@@ -7,34 +8,22 @@
 
 	<link rel="stylesheet" href="switch_pretty.css">
 </head>
+
 <body>
 	<header>
 		Full Stack Switch List
 	</header>
-	<div >
+	<div>
 		<!--okay so within this we will need a left and right section, and a footer-->
 
 		<div class="flex">
-			<section id="left_sec">
-				<!--
-				<ul>
-					<li>
-						Durock Pom
-					</li>
-					<li>
-						Durock Shrimp
-					</li>
-					<li>
-						Boba U4T
-					</li>
-					<li>
-						Boba U4S
-					</li>
-				</ul>
+			<section id="left_sec_cont">
 
-				general structure to use for the list
+				<button id="left_sec_btn" type="button" onclick="requestSwitches()">Show Switches</button>
+				<table id="switches">
 
-				-->
+				</table>
+
 			</section>
 			<section id="right_sec">
 				<header> Switch Details</header>
@@ -47,16 +36,35 @@
 					<br>
 					<button id="store_switch" onclick="storeSwitches()">Add</button>
 				</section>
-				<section id="switch_details">
-					<!--this is where the switch details will go-->
-					
-				</section>
 
 			</section>
 		</div>
+		<p>un bout de code en HTML</p>
+
+
+		<?php
+			//un bout de code en PHP
+			echo "un bout de code en PHP";
+		?>
 
 	</div>
 
-	<script src="switch_loaders.js"></script>
+	<!--
+		this is general planning area
+		okay so, we need to 
+		"Use ajax to get the file from server"
+		then use that file to desplay the cars in the webpage 
+		so the file is a json file, that file needs to be pulled in via ajax
+		then we need to parse the file and display it in the webpage
+
+		we need to display only the first object, and then provide 2 buttons to browse the list
+
+
+	-->
+
+	<!-- <script src="switch_loaders.js"></script> -->
+
+	<script src="switch_file_loader.js"></script>
 </body>
+
 </html>
