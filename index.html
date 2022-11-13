@@ -19,8 +19,10 @@
 		<div class="flex">
 			<section id="left_sec_cont">
 
-				<button id="left_sec_btn" type="button" onclick="requestSwitches()">Show Switches</button>
+				<button id="left_sec_btn" type="button" onclick="requestSwitches()">Load Switches</button>
+				<button id="show_switches" type="button" onclick="displaySwitches()">Show Switches</button>
 				<table id="switches">
+
 
 				</table>
 
@@ -29,8 +31,8 @@
 				<header> Switch Details</header>
 				<section id="button_bar">
 					<button id="home_button">Home</button>
-					<button id="back_button">Back</button>
-					<button id="next_button">Next</button>
+					<button id="back_button" type="button" onclick="prevSwitch()">Back</button>
+					<button id="next_button" type="button" onclick="nextSwitch()">Next</button>
 					<button id="end_button">End</button>
 
 					<br>
@@ -39,13 +41,7 @@
 
 			</section>
 		</div>
-		<p>un bout de code en HTML</p>
-
-
-		<?php
-			//un bout de code en PHP
-			echo "un bout de code en PHP";
-		?>
+		
 
 	</div>
 

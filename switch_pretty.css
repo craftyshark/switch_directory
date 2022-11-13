@@ -8,7 +8,8 @@
 }
 
 #left_sec {
-    width: 50%;
+    width: auto;
+    flex-wrap: nowrap;
 }
 
 #left_sec {
@@ -18,5 +19,11 @@
 
 #button_bar {
     display: flex;
-    width: 100%;
+    width: 50%;
+}
+
+#switches {
+    display: flex;
+    flex-wrap: nowrap;
+    width: auto;
 }
