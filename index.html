@@ -40,7 +40,51 @@
 				</section>
 
 			</section>
+
+			
+
 		</div>
+		<div>
+			<!-- so I don't want to put anything else in the above div as it looks ugly 
+			we'll start a new one that lets us pull up switches one at a time
+			at least for now, then we'll edit the above stuff
+			 -->
+
+			 <section id="switch_Single_JSON">
+				<header> Switch Details </header>
+				<section id="switch_single_display">
+					<!-- this is where we will display the switch details -->
+				</section>
+
+				<button id="load_single_switch" type="button" onclick="requestSingleSwitch()">Load Switch</button>
+				<button id="show_single_switch" type="button" onclick="displaySingleSwitch()">Show Switch</button>
+
+				<table id="single_switch">
+					<!-- this is where we will display the switch details -->
+				</table>
+			 </section>
+
+			 <!-- over here is where we will look through the switches 1 by 1, this is a later issue -->
+		</div>
+
+		<div>
+			<!-- next up I want to pull a switch from a specific position, so we will need 
+			a text box to specify that position, and everything else will remain the same -->
+
+			<input type="text" id="switch_position" placeholder="Enter Switch Position">
+			<button id="load_specific_switch" type="button" onclick="grabSwitch()">Load Switch</button>
+			<button id="show_specific_switch" type="button" onclick="displaySwitchIndex()">Show Switch</button>
+			
+
+			<table id="specific_switch">
+				<!-- this is where we will display the switch details -->
+			</table>
+		</div>
+
+		<!-- here we will display, a switch. We will be sending a variable for the index of the 
+		specific switch that we want 
+		don't forget to set up all the other stuff we have in other stuff. So 
+	request specific switch but, that has it's own input now. -->
 		
 
 	</div>
@@ -61,6 +105,7 @@
 	<!-- <script src="switch_loaders.js"></script> -->
 
 	<script src="switch_file_loader.js"></script>
+	<script src="getJSONData.js"></script>
 </body>
 
 </html>
