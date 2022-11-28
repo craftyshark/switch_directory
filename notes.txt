@@ -1,0 +1,19 @@
+okay so, next up we want to be able to click a button and have it sort all the cars by brand 
+which means we will need to LIST all the cars by brand. 
+
+we will only really need do that within the javascript. There's no good reason to do it within 
+php
+
+so step 1: 
+
+display all the cars in one large batch. 
+
+step 2:
+if SwitchBody.tbody != NUll 
+
+then SwitchBody.tbody = NULL 
+
+step 3: 
+
+pull the switches but sorted from the sql 
+send over that array after encoding in JSON

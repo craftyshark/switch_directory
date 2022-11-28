@@ -21,6 +21,7 @@
 
 				<button id="left_sec_btn" type="button" onclick="requestSwitches()">Load Switches</button>
 				<button id="show_switches" type="button" onclick="displaySwitches()">Show Switches</button>
+				<button id="load_brand" type="button" onclick="requestBrandSortSwitches()" >Load Brand Sorted Switches</button>
 				<table id="switches">
 
 
@@ -81,28 +82,8 @@
 			</table>
 		</div>
 
-		<!-- here we will display, a switch. We will be sending a variable for the index of the 
-		specific switch that we want 
-		don't forget to set up all the other stuff we have in other stuff. So 
-	request specific switch but, that has it's own input now. -->
-		
 
 	</div>
-
-	<!--
-		this is general planning area
-		okay so, we need to 
-		"Use ajax to get the file from server"
-		then use that file to desplay the cars in the webpage 
-		so the file is a json file, that file needs to be pulled in via ajax
-		then we need to parse the file and display it in the webpage
-
-		we need to display only the first object, and then provide 2 buttons to browse the list
-
-
-	-->
-
-	<!-- <script src="switch_loaders.js"></script> -->
 
 	<script src="switch_file_loader.js"></script>
 	<script src="getJSONData.js"></script>

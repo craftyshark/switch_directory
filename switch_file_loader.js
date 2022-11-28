@@ -9,6 +9,8 @@ let switchIndex = 0;
 let indexSwitch;
 
 let indexSwitchObj;
+
+let sortedSwitchesObj;
 //var typedoc;
 
 //okay so, we want to from here, first just create a skelleton that will 
@@ -207,35 +209,54 @@ function displaySwitchIndex() {
 
 }
 
+function requestBrandSortSwitches() {
+    //I want to grab switches sorted by brand from the server
+    //and then display them in the table
+    makeRequestBrandSort();
+}
 
+function makeRequestBrandSort() {
+    httpsRequest = new XMLHttpRequest();
+    if (!httpsRequest) {
+        alert("Unable to create request");
+        return false;
+    }
+    
+    //setting callback function to display all the switches sorted by brand in the table
+    httpsRequest.onreadystatechange = pullSortedSwitches;
+    //for the next request, I want to get sorted switches from the server
+    httpsRequest.open("GET", "getBrandSortS.php");
+    //this is just sending the request
+    httpsRequest.send();
 
+}
 
+function pullSortedSwitches() {
+    //we want to make sure we have a try catch functino here, so that we can
+    //catch any errors that might occur
+    try {
+        //check if request is done
+        if (httpsRequest.readyState === XMLHttpRequest.DONE) {
+            //check if all is well
+            if (httpsRequest.status === 200) {
+                //grab de switche
+                sortedSwitches = httpsRequest.responseText;
+                //objectify the switch
+                sortedSwitchesObj = JSON.parse(sortedSwitches);
+                
+                console.log(sortedSwitchesObj);
+            } else {
+                alert("Bro what heal you doing")
+            }
+        }
 
+    } catch (gotEeem) {
+        alert("Caught Exception: " + gotEeem.description);
+    }
+}
 
-// function makeRequest1() {
-//     httpsRequest = new XMLHttpRequest();
-//     if (!httpsRequest) {
-//         alert("Cannot create an XMLHTTP instance");
-//         return false;
-//     }
-//     httpsRequest.onreadystatechange = alertContents1;
-//     httpsRequest.open("GET", "mySwitches.json", true);
-//     httpsRequest.send();
+function displaySortedSwitches() {
+    //first things first, if anything is already here. I want to remove it
+    
+}
 
-// }
-
-
-// function alertContents1() {
-//     try {
-//         if (httpsRequest.readyState === XMLHttpRequest.DONE) {
-//             if (httpsRequest.status === 200) {
-//                 alert(httpsRequest.responseText);
-//             } else {
-//                 alert("There was a problem with the request.");
-//             }
-//         }
-//     }
-//     catch (e) {
-//         alert("Caught Exception: " + e.description);
-//     }
-// }
