@@ -7,40 +7,35 @@
 
 class SwitchItem implements JsonSerializable {
     public $weight;
-    public $house_mat;
-    public $stem_mat;
-    public $bottom_mat;
     public $brand;
     public $name;
     public $price;
+    public $silent;
+    public $type;
     public $img;
     public $link; 
     public function SetWeight($w) {
         $this->weight = $w;
     }
 
-    public function SetHouseMat($hm) {
-        $this->house_mat = $hm;
+    public function SetBrand($hm) {
+        $this->brand = $hm;
     }
 
-    public function SetStemMat($sm) {
-        $this->stem_mat = $sm;
+    public function SetName($sm) {
+        $this->name = $sm;
     }
 
-    public function SetBottomMat($bm) {
-        $this->bottom_mat = $bm;
+    public function SetPrice($bm) {
+        $this->price = $bm;
     }
 
-    public function SetBrand($b) {
-        $this->brand = $b;
+    public function SetSilent($b) {
+        $this->silent = $b;
     }
 
-    public function SetName($n) {
-        $this->name = $n;
-    }
-
-    public function SetPrice($p) {
-        $this->price = $p;
+    public function SetType($n) {
+        $this->type = $n;
     }
 
     public function SetImg($im) {
@@ -52,13 +47,12 @@ class SwitchItem implements JsonSerializable {
     }
 
     public function __construct() {
-        $this->weight = generateRandomString();
-        $this->house_mat = generateRandomString();
-        $this->stem_mat = generateRandomString();
-        $this->bottom_mat = generateRandomString();
+        $this->weight = 0;
         $this->brand = generateRandomString();
         $this->name = generateRandomString();
-        $this->price = generateRandomString();
+        $this->price = 0;
+        $this->silent = false;
+        $this->type = "clicky";
         $this->img = generateRandomString();
         $this->link = generateRandomString();
 
@@ -69,12 +63,11 @@ class SwitchItem implements JsonSerializable {
     public function jsonSerialize() {
         return [
             'weight' => $this->weight,
-            'house_mat' => $this->house_mat,
-            'stem_mat' => $this->stem_mat,
-            'bottom_mat' => $this->bottom_mat,
             'brand' => $this->brand,
             'name' => $this->name,
             'price' => $this->price,
+            'silent' => $this->silent,
+            'type' => $this->type,
             'img' => $this->img,
             'link' => $this->link
         ];
@@ -82,23 +75,14 @@ class SwitchItem implements JsonSerializable {
 
 
 
-    //we are going to go ahead and implement everything in student but for switches here
-    //for this specific set up, for our databrowser there is no reason to do something more complex 
-    //than that
-
-    //we are going to go ahead and create a destructor for this class
-    // public function __destruct() {
-    //     echo "Destroying " . $this->name . "<br>";
-    // }
 
     public function Set($json) {
         $this->SetWeight($json['weight']);
-        $this->SetHouseMat($json['house_mat']);
-        $this->SetStemMat($json['stem_mat']);
-        $this->SetBottomMat($json['bottom_mat']);
         $this->SetBrand($json['brand']);
         $this->SetName($json['name']);
         $this->SetPrice($json['price']);
+        $this->SetSilent($json['silent']);
+        $this->SetType($json['type']);
         $this->SetImg($json['img']);
         $this->SetLink($json['link']);
     }

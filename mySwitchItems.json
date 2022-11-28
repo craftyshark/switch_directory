@@ -1,0 +1,52 @@
+[
+  {
+    "weight": 67,
+    "brand": "Durock",
+    "name": "Sunflower",
+    "price": 10,
+    "silent": false,
+    "type": "tactile",
+    "img": "https://cdn.shopify.com/s/files/1/0275/3649/0561/products/durock-sunflower-pom-t1-tactile-switches-496716.jpg?v=1636594837",
+    "link": "https://divinikey.com/products/durock-sunflower-pom-t1-tactile-switches"
+  },
+  {
+    "weight": 68,
+    "brand": "Boba",
+    "name": "U4T",
+    "price": 10,
+    "silent": false,
+    "type": "tactile",
+    "img": "https://switches.mx/img/containers/assets/switches/photos/U4THero.jpg/d7a3b90e8992ba3dd7771251e3738a8f.jpg",
+    "link": "https://divinikey.com/products/boba-u4t-tactile-switches"
+  },
+  {
+    "weight": 68,
+    "brand": "Boba",
+    "name": "SL",
+    "price": 10,
+    "silent": true,
+    "type": "linear",
+    "img": "https://switches.mx/img/containers/assets/switches/photos/switch-1643161972.PNG/ab091d2bad062f4a2209dd54f7ab7bde.PNG",
+    "link": "https://divinikey.com/products/boba-sl-tactile-switches"
+  },
+  {
+    "weight": 67,
+    "brand": "Aqua",
+    "name": "King",
+    "price": 10,
+    "silent": false,
+    "type": "linear",
+    "img": "https://switches.mx/img/containers/assets/switches/photos/ak3.webp/599f308b510abd2b6a3588c3316cd107.webp",
+    "link": "https://divinikey.com/products/aqua-king-tactile-switches"
+  },
+  {
+    "weight": 67,
+    "brand": "Durock",
+    "name": "Shrimp",
+    "price": 10,
+    "silent": true,
+    "type": "tactile",
+    "img": "https://switches.mx/img/containers/assets/switches/photos/Durock-Shrimp_1800x1800.webp/4d4200192fbaf8608a8cb72ef99e8798.webp",
+    "link": "https://divinikey.com/products/durock-shrimp-tactile-switches"
+  }
+]

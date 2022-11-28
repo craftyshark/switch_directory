@@ -12,16 +12,16 @@ include 'switch.php';
 
 //I want to pull the switches from mySwitche.json into an array
 
-$myfile = fopen("mySwitches.json", "r") or die("Unable to open file!");
+$myfile = fopen("mySwitchItems.json", "r") or die("Unable to open file!");
 
 //now we need to read the file
-$mySwitches = fread($myfile,filesize("mySwitches.json"));
+$mySwitchItems = fread($myfile,filesize("mySwitchItems.json"));
 
 //now we need to close the file
 fclose($myfile);
 
 //now we need to decode the json
-$mySwitches = json_decode($mySwitches, true);
+$mySwitchItems = json_decode($mySwitchItems, true);
 
 
 
@@ -67,61 +67,56 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//we will now create a table with rows that corespond to the data in mySwitches.json
+// we will now create a table with rows that corespond to the data in mySwitchItems.json
 
-// $sql = "CREATE TABLE Switches (
-//     pkey INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-//     weight_ VARCHAR(10) NOT NULL,
-//     house_mat VARCHAR(30) NOT NULL,
-//     stem_mat VARCHAR(30) NOT NULL,
-//     bottom_mat VARCHAR(30) NOT NULL,
-//     brand_ VARCHAR(30) NOT NULL,
-//     name_ VARCHAR(30) NOT NULL,
-//     price_ VARCHAR(30) NOT NULL,
-//     img_ VARCHAR(30) NOT NULL,
-//     link_ VARCHAR(30) NOT NULL
-// )";
+$sql = "CREATE TABLE Switches (
+    pkey INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    weight_ INT(6) NOT NULL,
+    brand_ VARCHAR(30) NOT NULL,
+    name_ VARCHAR(30) NOT NULL,
+    price_ INT(6) NOT NULL,
+    silent_ VARCHAR(30) NOT NULL,
+    img_ VARCHAR(30) NOT NULL,
+    link_ VARCHAR(30) NOT NULL
+)";
 
-// if ($conn->query($sql) === TRUE) {
-//     echo "Table Switches created successfully<br>";
-// } else {
-//     echo "Error creating table: " . $conn->error ."<br>";
-// }
+if ($conn->query($sql) === TRUE) {
+    echo "Table Switches created successfully<br>";
+} else {
+    echo "Error creating table: " . $conn->error ."<br>";
+}
 
-//we will now insert the data from mySwitches.json into the table
+// we will now insert the data from mySwitchItems.json into the table
 
-$stmt = $conn->prepare("INSERT INTO Switches (weight_, house_mat, stem_mat, bottom_mat,
- brand_, name_, price_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
- if ($stmt === FALSE) {
+$stmt = $conn->prepare("INSERT INTO Switches (weight_, brand_, name_, price_, silent_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?)");
+if ($stmt === FALSE) {
     echo "there is a problem with prepare<br>";
     echo $conn->error;
- }
+}
 
- $stmt->bind_param("sssssssss", $weight_, $house_mat, $stem_mat, $bottom_mat, $brand_, $name_, $price_, $img_, $link_);
+$stmt->bind_param("ississs", $weight_, $brand_, $name_, $price_, $silent_, $img_, $link_);
 
 for ($i=0;$i<$n;$i++) {
     $switchItem = new SwitchItem();
     
-    $switchItem->setWeight($mySwitches[$i]["weight"]);
-    $switchItem->setHouseMat($mySwitches[$i]["house_mat"]);
-    $switchItem->setStemMat($mySwitches[$i]["stem_mat"]);
-    $switchItem->setBottomMat($mySwitches[$i]["bottom_mat"]);
-    $switchItem->setBrand($mySwitches[$i]["brand"]);
-    $switchItem->setName($mySwitches[$i]["name"]);
-    $switchItem->setPrice($mySwitches[$i]["price"]);
-    $switchItem->setImg($mySwitches[$i]["img"]);
-    $switchItem->setLink($mySwitches[$i]["link"]);
+    $switchItem->SetWeight($mySwitchItems[$i]["weight"]);
+    $switchItem->SetBrand($mySwitchItems[$i]["brand"]);
+    $switchItem->SetName($mySwitchItems[$i]["name"]);
+    $switchItem->SetPrice($mySwitchItems[$i]["price"]);
+    $switchItem->SetSilent($mySwitchItems[$i]["silent"]);
+    $switchItem->SetImg($mySwitchItems[$i]["img"]);
+    $switchItem->SetLink($mySwitchItems[$i]["link"]);
+
     
     echo $switchItem->Display() . "<br>";
     $weight_ = $switchItem->weight;
-    $house_mat = $switchItem->house_mat;
-    $stem_mat = $switchItem->stem_mat;
-    $bottom_mat = $switchItem->bottom_mat;
     $brand_ = $switchItem->brand;
     $name_ = $switchItem->name;
     $price_ = $switchItem->price;
+    $silent_ = $switchItem->silent;
     $img_ = $switchItem->img;
     $link_ = $switchItem->link;
+
 
     $stmt->execute();
 
