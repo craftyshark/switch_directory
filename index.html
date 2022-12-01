@@ -5,8 +5,8 @@
 	<meta charset="UTF-8">
 	<title>Switch Directory</title>
 
+    <link rel="stylesheet" href="switch_pretty.css">
 
-	<link rel="stylesheet" href="switch_pretty.css">
 </head>
 
 <body>
@@ -14,79 +14,55 @@
 		Full Stack Switch List
 	</header>
 	<div>
-		<!--okay so within this we will need a left and right section, and a footer-->
+		<!-- okay so I want to display data in a data browser table with a few specific fields  -->
+        <!-- I want two string properties, a number type, a bool type, and a category. 
+        and an image. We will be taking care of the majority of these elements in JS, just so we can 
+        declare and work with them there. Will make our life a bit easier I think -->
 
-		<div class="flex">
-			<section id="left_sec_cont">
+        <!-- we will have a next, previous, go to first, go to last, display curr item index, and 
+        number of elements -->
 
-				<button id="left_sec_btn" type="button" onclick="requestSwitches()">Load Switches</button>
-				<button id="show_switches" type="button" onclick="displaySwitches()">Show Switches</button>
-				<button id="load_brand" type="button" onclick="requestBrandSortSwitches()" >Load Brand Sorted Switches</button>
-				<table id="switches">
+        <!-- I want things to be shown, on load, with the ability to move and change things seperate-->
 
+        <div class="flex">
+            <div id="browser">
+                <button id="nextItem" type="button" onclick="nextSwitch()">Next</button>
+                <button id="prevItem" type="button" onclick="prevSwitch()">Previous</button>
+                <button id="firstItem" type="button" onclick="firstSwitch()">First</button>
+                <button id="lastItem" type="button" onclick="lastSwitch()">Last</button>
+                <button id="editSwitch" type="button" onclick="editSwitch()">Edit</button>
+            </div>
 
-				</table>
+            <br>
 
-			</section>
-			<section id="right_sec">
-				<header> Switch Details</header>
-				<section id="button_bar">
-					<button id="home_button">Home</button>
-					<button id="back_button" type="button" onclick="prevSwitch()">Back</button>
-					<button id="next_button" type="button" onclick="nextSwitch()">Next</button>
-					<button id="end_button">End</button>
-
-					<br>
-					<button id="store_switch" onclick="storeSwitches()">Add</button>
-				</section>
-
-			</section>
-
-			
-
-		</div>
-		<div>
-			<!-- so I don't want to put anything else in the above div as it looks ugly 
-			we'll start a new one that lets us pull up switches one at a time
-			at least for now, then we'll edit the above stuff
-			 -->
-
-			 <section id="switch_Single_JSON">
-				<header> Switch Details </header>
-				<section id="switch_single_display">
-					<!-- this is where we will display the switch details -->
-				</section>
-
-				<button id="load_single_switch" type="button" onclick="requestSingleSwitch()">Load Switch</button>
-				<button id="show_single_switch" type="button" onclick="displaySingleSwitch()">Show Switch</button>
-
-				<table id="single_switch">
-					<!-- this is where we will display the switch details -->
-				</table>
-			 </section>
-
-			 <!-- over here is where we will look through the switches 1 by 1, this is a later issue -->
-		</div>
-
-		<div>
-			<!-- next up I want to pull a switch from a specific position, so we will need 
-			a text box to specify that position, and everything else will remain the same -->
-
-			<input type="text" id="switch_position" placeholder="Enter Switch Position">
-			<button id="load_specific_switch" type="button" onclick="grabSwitch()">Load Switch</button>
-			<button id="show_specific_switch" type="button" onclick="displaySwitchIndex()">Show Switch</button>
-			
-
-			<table id="specific_switch">
-				<!-- this is where we will display the switch details -->
-			</table>
-		</div>
+            <div id="switch_single_display">
+                <!-- this is where we will display the switch details -->
+                <table id="switches" class="switches">
+                    <tbody>
+                        <tr>
+                            <th>Switch Weight</th>
+                            <th>Switch Brand</th>
+                            <th>Switch Name</th>
+                            <th>Switch Price</th>
+                            <th>Silenced Switch</th>
+                            <th>Switch Type</th>
+                            <th>Switch Image</th>
+                            <th>Switch Link</th>
+                            <th>Items Index</th>
+                            <th>Total Items</th>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
 
 
 	</div>
 
-	<script src="switch_file_loader.js"></script>
-	<script src="getJSONData.js"></script>
+
+
+	<script src="switchLoaderNew.js"></script>
+
 </body>
 
 </html>
