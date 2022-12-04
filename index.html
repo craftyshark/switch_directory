@@ -30,7 +30,9 @@
                 <button id="prevItem" type="button" onclick="prevSwitch()">Previous</button>
                 <button id="firstItem" type="button" onclick="firstSwitch()">First</button>
                 <button id="lastItem" type="button" onclick="lastSwitch()">Last</button>
-                <button id="editSwitch" type="button" onclick="editSwitch()">Edit</button>
+                <button id="editSwitch" type="button" onclick="editSwitch()">Toggle Edit</button>
+                <button id="saveEdits" type="button" onclick="saveEdits()">Save Edits</button>
+
             </div>
 
             <br>
@@ -56,12 +58,24 @@
                 </table>
             </div>
 
+            <br>
+
+            <div id="insertSwitch">
+                <button id="insertSwitchButton" type="button" onclick="insertSwitch()">Open Insert Editor</button>
+                
+                <!-- here is where the user will enter data for the switch that is about to be inserted. -->
+                <!-- fields to edit will be added dynamically  -->
+
+
+            </div> 
 
 	</div>
 
-
-
+    <script src="js/switch_list_builder.js"></script>
+    <script src="js/addSwitch.js"></script>
+    <script src="js/switchEditor.js"></script>
 	<script src="switchLoaderNew.js"></script>
+
 
 </body>
 

@@ -1,38 +1,28 @@
-<?php 
+<?php
 
 include 'switch.php';
 
 //in this php file, I want to delete all the rows in the myDBSwitches database, from the 
 //switches table and then resave the switches from mySwitches.json
 
-//later on we will move to doing this purely in php, but just to get it working, I will use
-//the mySwitches.json file
+//grab the incoming json data with post, it will be named, json
+$json = json_decode($_POST['json'], true);
 
-//first, we need to open the file
-$myfile = fopen("mySwitches.json", "r") or die("Unable to open file!");
 
-//now we need to read the file 
-$mySwitches = fread($myfile,filesize("mySwitches.json"));
-
-//now we need to close the file
-fclose($myfile);
-
-//now we need to decode the json
-$mySwitches = json_decode($mySwitches, true);
 
 //now we create an array of size of mySwitches
 
-$n = count($mySwitches);
+$n = count($json);
 $a0 = array();
-for ($i=0;$i<$n;$i++) {
-    $a0[$i]=new SwitchItem();
+for ($i = 0; $i < $n; $i++) {
+    $a0[$i] = new SwitchItem();
 }
 
 //now we set our database info
 $servername = "localhost"; //default server name
 $username = "AdminLab12"; //user name that you created
 $password = "73xp7vQHWFzi6Xta"; //password that you created
-$dbname = "myDBSwitches";
+$dbname = "myDBSwitches"; //database name that you created
 
 //create connection 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -57,36 +47,34 @@ if ($conn->query($sql) === TRUE) {
 
 //we will now insert the data from mySwitches.json into the table
 
-$stmt = $conn->prepare("INSERT INTO Switches (weight_, house_mat, stem_mat, bottom_mat,
- brand_, name_, price_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
- if ($stmt === FALSE) {
+$stmt = $conn->prepare("INSERT INTO Switches (weight_, brand_, name_, price_,
+ silent_, type_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+if ($stmt === FALSE) {
     echo "there is a problem with prepare<br>";
     echo $conn->error;
- }
+}
 
- $stmt->bind_param("sssssssss", $weight_, $house_mat, $stem_mat, $bottom_mat, $brand_, $name_, $price_, $img_, $link_);
+$stmt->bind_param("issiisss", $weight_, $brand_, $name_, $price_, $silent_, $type_, $img_, $link_);
 
-for ($i=0;$i<$n;$i++) {
+for ($i = 0; $i < $n; $i++) {
     $switchItem = new SwitchItem();
-    
-    $switchItem->setWeight($mySwitches[$i]["weight"]);
-    $switchItem->setHouseMat($mySwitches[$i]["house_mat"]);
-    $switchItem->setStemMat($mySwitches[$i]["stem_mat"]);
-    $switchItem->setBottomMat($mySwitches[$i]["bottom_mat"]);
-    $switchItem->setBrand($mySwitches[$i]["brand"]);
-    $switchItem->setName($mySwitches[$i]["name"]);
-    $switchItem->setPrice($mySwitches[$i]["price"]);
-    $switchItem->setImg($mySwitches[$i]["img"]);
-    $switchItem->setLink($mySwitches[$i]["link"]);
-    
+
+    $switchItem->SetWeight($json[$i]["weight"]);
+    $switchItem->SetBrand($json[$i]["brand"]);
+    $switchItem->SetName($json[$i]["name"]);
+    $switchItem->SetPrice($json[$i]["price"]);
+    $switchItem->SetSilent($json[$i]["silent"]);
+    $switchItem->SetType($json[$i]["type"]);
+    $switchItem->SetImg($json[$i]["img"]);
+    $switchItem->SetLink($json[$i]["link"]);
+
     echo $switchItem->Display() . "<br>";
     $weight_ = $switchItem->weight;
-    $house_mat = $switchItem->house_mat;
-    $stem_mat = $switchItem->stem_mat;
-    $bottom_mat = $switchItem->bottom_mat;
     $brand_ = $switchItem->brand;
     $name_ = $switchItem->name;
     $price_ = $switchItem->price;
+    $silent_ = $switchItem->silent;
+    $type_ = $switchItem->type;
     $img_ = $switchItem->img;
     $link_ = $switchItem->link;
 

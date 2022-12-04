@@ -23,7 +23,7 @@ let requestedSwitchIndex;
 
 function startUpLoad() {
     requestStartUpSwitches();
-    
+
 }
 
 //so I want to make sure an inital switch is loaded up and shown on load up
@@ -41,7 +41,8 @@ function makeRequest() {
     }
 
     httpsRequest.onreadystatechange = pullAllSwitches;
-    httpsRequest.open("GET", "get_data.php");
+    httpsRequest.open('GET', 'php/get_DB_data.php');
+    // httpsRequest.open('GET', 'mySwitchItems.json');
     httpsRequest.send();
 
 }
@@ -52,17 +53,26 @@ function pullAllSwitches() {
             if (httpsRequest.status === 200) {
                 //request from get_data.php, all switches
                 allSwitchesJson = httpsRequest.responseText;
+                // console.log(allSwitchesJson);
                 //objectify the switches
                 allSwitchesObj = JSON.parse(allSwitchesJson);
                 console.log(allSwitchesObj);
 
-                displaySwitchesOnStartup();
+                if (currentlyEditing) {
+                    //we are editing, just redraw the table
+                    redrawCurrentSwitch();
+                } else {
+
+                    displaySwitchesOnStartup();
+                }
+
             } else {
                 alert("Bro what heal you doing")
             }
         }
     } catch (error) {
         alert("Caught Exception: " + error.description);
+        console.log(error);
     }
 }
 
@@ -79,9 +89,9 @@ function displaySwitchesOnStartup() {
 
     //we will drop in the first swithc, but the rest will be available to be displayed, in other functions
     SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[0].weight + "</td><td>" + allSwitchesObj[0].brand + "</td><td>" +
-    allSwitchesObj[0].name + "</td><td>" + allSwitchesObj[0].price + "</td><td>" + allSwitchesObj[0].silent + "</td><td>" +
-    allSwitchesObj[0].type + "</td><td>" + '<img src="' + allSwitchesObj[0].img + '">' + "</td><td>" + '<da href="' + allSwitchesObj[0].link + '"> Link </a>' + 
-    "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
+        allSwitchesObj[0].name + "</td><td>" + allSwitchesObj[0].price + "</td><td>" + allSwitchesObj[0].silent + "</td><td>" +
+        allSwitchesObj[0].type + "</td><td>" + '<img src="' + allSwitchesObj[0].img + '">' + "</td><td>" + '<a href="' + allSwitchesObj[0].link + '"> Link </a>' +
+        "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
 
     //I want to give the above image a height and width of 20px
 
@@ -104,17 +114,18 @@ function nextSwitch() {
     if (currentSwitchIndex < allSwitchesObj.length - 1) {
         currentSwitchIndex++;
     } else {
+
         currentSwitchIndex = 0;
     }
 
-    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight 
-    + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
-     + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
-     + "</td><td>" + '<da href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
-     + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
-    
+    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
+        + "</td><td>" + '<a href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
+        + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
+
     document.getElementsByTagName("img")[0].style.height = "75px";
     document.getElementsByTagName("img")[0].style.width = "75px";
 }
@@ -133,13 +144,13 @@ function prevSwitch() {
         currentSwitchIndex = allSwitchesObj.length - 1;
     }
 
-    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight 
-    + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
-     + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
-     + "</td><td>" + '<da href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
-     + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
+    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
+        + "</td><td>" + '<a href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
+        + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
 
     document.getElementsByTagName("img")[0].style.height = "75px";
     document.getElementsByTagName("img")[0].style.width = "75px";
@@ -154,13 +165,13 @@ function firstSwitch() {
     let SwitchBody = SwitchTable.lastElementChild;
 
     currentSwitchIndex = 0;
-    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight 
-    + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
-     + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
-     + "</td><td>" + '<da href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
-     + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
+    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
+        + "</td><td>" + '<a href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
+        + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
 
     document.getElementsByTagName("img")[0].style.height = "75px";
     document.getElementsByTagName("img")[0].style.width = "75px";
@@ -178,13 +189,13 @@ function lastSwitch() {
         console.log("No switches in array");
         return;
     }
-    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight 
-    + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
-     + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
-    allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
-     + "</td><td>" + '<da href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
-     + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
+    SwitchBody.lastChild.innerHTML = "<td>" + allSwitchesObj[currentSwitchIndex].weight
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].brand + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].name + "</td><td>" + allSwitchesObj[currentSwitchIndex].price
+        + "</td><td>" + allSwitchesObj[currentSwitchIndex].silent + "</td><td>" +
+        allSwitchesObj[currentSwitchIndex].type + "</td><td>" + '<img src="' + allSwitchesObj[currentSwitchIndex].img + '">'
+        + "</td><td>" + '<a href="' + allSwitchesObj[currentSwitchIndex].link + '"> Link </a>' + "</td>"
+        + "</td><td>" + currentSwitchIndex + "</td><td>" + allSwitchesObj.length + "</td>";
 
     document.getElementsByTagName("img")[0].style.height = "75px";
     document.getElementsByTagName("img")[0].style.width = "75px";

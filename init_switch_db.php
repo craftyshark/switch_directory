@@ -67,34 +67,36 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// we will now create a table with rows that corespond to the data in mySwitchItems.json
+// // we will now create a table with rows that corespond to the data in mySwitchItems.json
 
-$sql = "CREATE TABLE Switches (
-    pkey INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    weight_ INT(6) NOT NULL,
-    brand_ VARCHAR(30) NOT NULL,
-    name_ VARCHAR(30) NOT NULL,
-    price_ INT(6) NOT NULL,
-    silent_ VARCHAR(30) NOT NULL,
-    img_ VARCHAR(30) NOT NULL,
-    link_ VARCHAR(30) NOT NULL
-)";
+// $sql = "CREATE TABLE Switches (
+//     pkey INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+//     weight_ INT(6) NOT NULL,
+//     brand_ VARCHAR(30) NOT NULL,
+//     name_ VARCHAR(30) NOT NULL,
+//     price_ INT(6) NOT NULL,
+//     silent_ TINYINT(1) NOT NULL,
+//     type_ VARCHAR(30) NOT NULL,
+//     img_ VARCHAR(200) NOT NULL,
+//     link_ VARCHAR(200) NOT NULL
+// )";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table Switches created successfully<br>";
-} else {
-    echo "Error creating table: " . $conn->error ."<br>";
-}
+// if ($conn->query($sql) === TRUE) {
+//     echo "Table Switches created successfully<br>";
+// } else {
+//     echo "Error creating table: " . $conn->error ."<br>";
+// }
 
 // we will now insert the data from mySwitchItems.json into the table
 
-$stmt = $conn->prepare("INSERT INTO Switches (weight_, brand_, name_, price_, silent_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Switches 
+(weight_, brand_, name_, price_, silent_, type_, img_, link_) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === FALSE) {
     echo "there is a problem with prepare<br>";
     echo $conn->error;
 }
 
-$stmt->bind_param("ississs", $weight_, $brand_, $name_, $price_, $silent_, $img_, $link_);
+$stmt->bind_param("ississss", $weight_, $brand_, $name_, $price_, $silent_, $type_, $img_, $link_);
 
 for ($i=0;$i<$n;$i++) {
     $switchItem = new SwitchItem();
@@ -104,6 +106,7 @@ for ($i=0;$i<$n;$i++) {
     $switchItem->SetName($mySwitchItems[$i]["name"]);
     $switchItem->SetPrice($mySwitchItems[$i]["price"]);
     $switchItem->SetSilent($mySwitchItems[$i]["silent"]);
+    $switchItem->SetType($mySwitchItems[$i]["type"]);
     $switchItem->SetImg($mySwitchItems[$i]["img"]);
     $switchItem->SetLink($mySwitchItems[$i]["link"]);
 
@@ -114,6 +117,7 @@ for ($i=0;$i<$n;$i++) {
     $name_ = $switchItem->name;
     $price_ = $switchItem->price;
     $silent_ = $switchItem->silent;
+    $type_ = $switchItem->type;
     $img_ = $switchItem->img;
     $link_ = $switchItem->link;
 
