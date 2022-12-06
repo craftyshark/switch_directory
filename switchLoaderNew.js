@@ -53,7 +53,7 @@ function pullAllSwitches() {
             if (httpsRequest.status === 200) {
                 //request from get_data.php, all switches
                 allSwitchesJson = httpsRequest.responseText;
-                // console.log(allSwitchesJson);
+                console.log(allSwitchesJson);
                 //objectify the switches
                 allSwitchesObj = JSON.parse(allSwitchesJson);
                 console.log(allSwitchesObj);
@@ -200,6 +200,37 @@ function lastSwitch() {
     document.getElementsByTagName("img")[0].style.height = "75px";
     document.getElementsByTagName("img")[0].style.width = "75px";
 }
+
+function sortSwitchByBrand() {
+    // sort the array by brand, by making a get request to
+    // getBrandSort.php, and then 
+    // redraw the table with the new sorted array
+
+    currentlyEditing = true;
+    httpsRequest = new XMLHttpRequest();
+    httpsRequest.onreadystatechange = pullAllSwitches;
+    httpsRequest.open("GET", "getBrandSortS.php");
+    httpsRequest.send();
+}
+
+function sortSwitchDefault() {
+    // sort the array by default, simply by recalling 
+    // pullAllSwitches(), with currently editing set to 
+    // true so that the table is redrawn
+    // global variable moment by setting 
+    // isDefault if we care about making sure 
+    // never to change the order of the array (I don't care)
+
+    currentlyEditing = true;
+    reLoadIfSuccessful();
+
+}
+
+
+
+
+
+
 
 
 

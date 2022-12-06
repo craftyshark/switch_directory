@@ -6,7 +6,9 @@ let currentlyEditing = false;
 
 function editSwitch() {
   //we will be using the currentSwitchIndex to keep track of which switch we are on
-
+  
+  
+  
   let SwitchTable = document.getElementById("switches");
   let SwitchBody = SwitchTable.lastElementChild;
   //find the last row in SwitchBody, and replace it's contents with the next switch

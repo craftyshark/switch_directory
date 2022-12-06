@@ -33,12 +33,11 @@ if ($result->num_rows > 0) {
 
         $newSwitchItem = new SwitchItem();
         $newSwitchItem->weight = $row["weight_"];
-        $newSwitchItem->house_mat = $row["house_mat"];
-        $newSwitchItem->stem_mat = $row["stem_mat"];
-        $newSwitchItem->bottom_mat = $row["bottom_mat"];
         $newSwitchItem->brand = $row["brand_"];
         $newSwitchItem->name = $row["name_"];
         $newSwitchItem->price = $row["price_"];
+        $newSwitchItem->silent = $row["silent_"];
+        $newSwitchItem->type = $row["type_"];
         $newSwitchItem->img = $row["img_"];
         $newSwitchItem->link = $row["link_"];
         $arr[$i] = $newSwitchItem;
